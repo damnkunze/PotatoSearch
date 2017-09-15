@@ -1,0 +1,32 @@
+#info_text {
+    float: left;
+    clear: both;
+    width: 100%;
+    font-size: 1em;
+    color: rgb(0, 0, 0);
+    margin-bottom: 1em;
+}
+
+#inputInfo {
+    width: 180px;
+    float: right;
+    position: absolute;
+    right: 30%;
+    top: 30%;
+    z-index: 2;
+
+}
+
+#searcherInfo {
+    width: 220px;
+    float: right;
+    position: fixed;
+    top: 20%;
+    right: 2%;
+    z-index: 5;
+}
+
+.info:hover, .info:active, .info:focus {
+    cursor: pointer;
+    opacity: 0.95;
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="initial-scale=1.0" name="viewport"/>
+        <meta content="With Potato-Search you have to do one step less at surfing the web." name="description"/>
+        <title>
+            Potato Search
+        </title>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet"/>
+        <link href="images/PotatoSearch.ico" rel="shortcut icon"/>
+        <link href="css/history.css" rel="stylesheet"/>
+        <link href="css/info.css" rel="stylesheet"/>
+        <link href="css/new.css" rel="stylesheet"/>
+        <link href="css/popup.css" rel="stylesheet"/>
+        <link href="css/settings.css" rel="stylesheet"/>
+        <link href="css/sidebar.css" rel="stylesheet"/>
+        <link href="css/index.css" rel="stylesheet"/>
+        <link href="css/searcher.css" rel="stylesheet"/>
+        <script src="./js/jquery-3.1.1.js">
+        </script>
+        <script src="./js/jQuery-tmpl.js">
+        </script>
+        <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+        </script>
+        <script src="https://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js">
+        -->
+        <script src="js/cross domain ajax.js">
+        </script>
+        <script src="js/polyfills.js">
+        </script>
+        <script src="js/controller.js">
+        </script>
+    </head>
+    <templates>
+        <script id="default_searcher" type="text/x-jQuery-tmpl">
+            <label class="DEFAULT_text">
+                SELECTED
+            </label>
+        </script>
+        <script id="new-tmpl" type="text/x-jQuery-tmpl">
+            <li id="new_behind-searchers">
+                <a style="background-image: url('images/new_icon.png')" id="new-plus">
+
+                </a>
+            </li>
+        </script>
+        <script id="new-searcher" type="text/x-jQuery-tmpl">
+            <li class="searcher" data-name="${name}" data-url="${url}">
+                <a class="edit-searcher transparent" title="Edit"></a>
+                <a class="simage" style="background-image: url(${image})">
+                </a>
+                <h3>
+                </h3>
+                <p>   
+                </p>
+            </li>
+        </script>
+        <script id="history_new-line" type="text/x-jQuery-tmpl">
+            <li>
+                <div class="history-table-search">${search}</div>
+                <div class="history-table-engine">${engine}</div>
+            </li>
+        </script>
+    </templates>
+    <body>
+        <div class="disabled" id="message_header">
+        </div>
+        <sidebar>
+            <div id="sidebar">
+                <div id="tool_holder">
+                    <div class="tool" id="settings">
+                        <a class="tool_icon n" id="settings-n" style="background-image: url('images/settings_icon.png')">
+                        </a>
+                        <a class="tool_icon i disabled" id="settings-i" style="background-image: url('images/settings_icon-i.png')">
+                        </a>
+                    </div>
+                    <div class="tool" id="info">
+                        <a class="tool_icon n" id="info-n" style="background-image: url('images/info_icon.png')">
+                        </a>
+                        <a class="tool_icon i disabled" id="info-i" style="background-image: url('images/info_icon-i.png')">
+                        </a>
+                    </div>
+                    <!--  <div class="tool" id="new">
+                        <a class="tool_icon n" id="new-n" style="background-image: url('images/new_icon.png')">
+                        </a>
+                        <a class="tool_icon i disabled" id="new-i" style="background-image: url('images/new_icon-i.png')">
+                        </a>
+                    </div> -->
+                    <div class="tool" id="history">
+                        <a class="tool_icon n" id="history-n" style="background-image: url('images/history_icon.png')">
+                        </a>
+                        <a class="tool_icon i disabled" id="history-i" style="background-image: url('images/history_icon-i.png')">
+                        </a>
+                    </div>
+                    <div class="tool">
+                        <a href="games">
+                            Games
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </sidebar>
+        <popups>
+            <div class="popup popup-withCorner disabled" id="history_popup">
+                <p class="popup-header">
+                    History
+                </p>
+                <a class="popup-close" title="close Popup">
+                    ×
+                </a>
+                <img class="popup_corner" src="images/corner.png"/>
+                <ul id="history_list">
+                </ul>
+            </div>
+            <div class="popup popup-withCorner disabled" id="info_popup">
+                <p class="popup-header">
+                    Info
+                </p>
+                <a class="popup-close" title="close Popup">
+                    ×
+                </a>
+                <img class="popup_corner" src="images/corner.png"/>
+                <div id="info_text">
+                    Did it for teh lulz :)
+                </div>
+            </div>
+            <div class="popup popup-withCorner disabled" id="settings_popup">
+                <p class="popup-header">
+                    Settings
+                </p>
+                <a class="popup-close" title="close Popup">
+                    ×
+                </a>
+                <img class="popup_corner" src="images/corner.png"/>
+                <a class="button" id="change-default">
+                    Change selected search engine
+                </a>
+                <a class="button" id="remove-data">
+                    Reset all data
+                </a>
+            </div>
+        </popups>
+        <importantpopups>
+            <div class="popup popup-important disabled" id="new_popup">
+                <p class="popup-header">
+                    Add search engine
+                    <span class="popup-header-green">
+                        (Finally it works!)
+                    </span>
+                </p>
+                <a class="popup-close" title="close Popup">
+                    ×
+                </a>
+                <div class="popup_content">
+                    <div class="popup_lbl-inp popup_lbl-inp-2">
+                        <p class="popup_label">
+                            Name
+                        </p>
+                        <input class="popup_input" id="new_name" placeholder="Leo German - French" type="text"/>
+                    </div>
+                    <div class="popup_lbl-inp popup_lbl-inp-1">
+                        <p class="popup_label">
+                            Searching Url
+                        </p>
+                        <input class="popup_input" id="new_search-url" placeholder="http://dict.leo.org/französisch-deutsch/" type="text"/>
+                    </div>
+                    <div class="popup_lbl-inp popup_lbl-inp-3">
+                        <p class="popup_label">
+                            Url to image
+                        </p>
+                        <input class="popup_input" id="new_image-url" placeholder="https://dict.leo.org/img/favicons/frde-192-f2b7a0a4.png" type="text"/>
+                    </div>
+                    <a class="button" id="add-new">
+                        Add
+                    </a>
+                </div>
+            </div>
+            <div class="popup popup-important disabled" id="edit_popup">
+                <p class="popup-header">
+                    Edit search engine
+                </p>
+                <a class="popup-close" title="close Popup">
+                    ×
+                </a>
+                <div class="popup_content">
+                    <div class="popup_lbl-inp popup_lbl-inp-2">
+                        <p class="popup_label">
+                            Name
+                        </p>
+                        <input class="popup_input" id="edit_name" type="text"/>
+                    </div>
+                    <div class="popup_lbl-inp popup_lbl-inp-1">
+                        <p class="popup_label">
+                            Searching Url
+                        </p>
+                        <input class="popup_input" id="edit_search-url" type="text"/>
+                    </div>
+                    <div class="popup_lbl-inp popup_lbl-inp-3">
+                        <p class="popup_label">
+                            Url to image
+                        </p>
+                        <input class="popup_input" id="edit_image-url" type="text"/>
+                    </div>
+                    <a class="button" id="submit-edit">
+                        Submit Changes
+                    </a>
+                    <a class="button" id="edit-remove">
+                        Remove Engine
+                    </a>
+                </div>
+            </div>
+        </importantpopups>
+        <section>
+            <div id="header">
+                <div id="potatoTitleSideNote">
+                    <img id="potato" src="images/PotatoSearch.png"/>
+                    <label id="title">
+                        Potato Search
+                    </label>
+                </div>
+                <img class="info" id="inputInfo" src="images/inputInfo.png"/>
+                <label id="header-text">
+                    Search on
+                </label>
+                <span id="searchInput">
+                    <input autofocus="" id="searchInputField" type="text">
+                        <a id="searchInputIcon" style="background-image: url('images/search_icon.png');">
+                        </a>
+                    </input>
+                </span>
+            </div>
+        </section>
+        <searchers>
+            <img class="info" id="searcherInfo" src="images/searcherInfo.png"/>
+            <ul class="rig columns-4" id="searcher-table">
+            </ul>
+        </searchers>
+        <a class="disabled" data-default="DEFAULT_is_set" id="switch">
+        </a>
+        <div class="disabled" id="background-hider_important">
+        </div>
+        <div class="disabled" id="background-hider_withCorner">
+        </div>
+    </body>
+</html>
