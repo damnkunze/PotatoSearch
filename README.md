@@ -9,5 +9,4 @@ Popular search engines are already added.
 ```
 python -m http.server
 ```
-
-![preview](https://raw.githubusercontent.com/Kart0ffelheld/PotatoSearch/master/preview.png)
+<img width="1280" alt="Bildschirmfoto 2022-03-20 um 13 45 08" src="https://user-images.githubusercontent.com/22854379/159179971-d0282ae9-e735-4a34-98d1-585d1fd8a198.png">
