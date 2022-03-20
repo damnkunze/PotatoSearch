@@ -1,5 +1,5 @@
 # PotatoSearch
-A "meta search engine" to search directly with websites build in search function. Therefore you always get exactly what you search for. 
+A "meta search engine" to search directly with websites build in search function. So you always get exactly what you're searching for
 Popular search engines are already added. 
 
 # Instrucions
