@@ -13,4 +13,4 @@ pip install Flask
 flask run
 ```
 
-<img width="1280" alt="Bildschirmfoto 2022-03-20 um 13 45 08" src="https://user-images.githubusercontent.com/22854379/159179971-d0282ae9-e735-4a34-98d1-585d1fd8a198.png">
+<img width="1280" alt="Bildschirmfoto 2022-03-23 um 15 08 09" src="https://user-images.githubusercontent.com/22854379/159795975-d4d5585a-dc02-43a1-b96b-b0757105e2d5.png">
